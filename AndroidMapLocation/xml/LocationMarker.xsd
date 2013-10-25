@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<!-- definition of employee complex element -->
+
+<xs:element name="Location">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element name="Marker" minOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Latitude" type="xs:decimal"/>
+						<xs:element name="Longditude" type="xs:decimal"/>
+						<xs:element name="Date" type="xs:date"/>
+						<xs:element name="Time" type="xs:time"/>
+					</xs:sequence>
+					<xs:attribute name="id" type="xs:integer"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+</xs:schema>
