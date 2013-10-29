@@ -19,10 +19,18 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewDebug.ExportedProperty;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.TextView.OnEditorActionListener;
 import android.app.AlertDialog;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -47,6 +55,13 @@ public class MainActivity extends Activity implements LocationListener {
 	private Resources resourceVals;
 	private double lat = 0;
 	private double lng = 0;
+	
+	//user ID Window
+		Button  btnClosePopup;
+		PopupWindow UserIDWindow;
+		EditText UserID_Edit; 
+		String UserID;
+	//user ID Window
 	  
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +75,9 @@ public class MainActivity extends Activity implements LocationListener {
 			askToContinue();
 		} // try and refresh maps
 		locationManager.requestLocationUpdates(provider, 20000, 10, this);
+		
+		//open pop-up window for user ID
+		this.putIDWindow();
 	} // method onCreate
 	
 	class buttonListener implements View.OnClickListener {
@@ -241,4 +259,57 @@ public class MainActivity extends Activity implements LocationListener {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	//pop-up ID window
+		public void putIDWindow()
+		{
+			 try { 
+		 	    	// get the instance of the LayoutInflater 
+		 	    	LayoutInflater inflater = (LayoutInflater) MainActivity.this 
+		 	    	.getSystemService(Context.LAYOUT_INFLATER_SERVICE); 
+		 	    	View layout = inflater.inflate(R.layout.id_window,(ViewGroup)findViewById(R.id.popup_element)); 
+		 	    	
+		 	    	//create pop-up 
+		 	    	UserIDWindow = new PopupWindow(layout, 350, 350, true); 
+		 	    	UserIDWindow.showAtLocation(layout, Gravity.CENTER, 0, 0);
+		 	    	UserIDWindow.setFocusable(true);
+		 	    	
+		 	    	//class for ID EditBox
+		 	    	UserID_Edit   = (EditText)layout.findViewById(R.id.UserID);
+		 	    	
+		 	    	//Listener for Enter in User ID Text Box
+		 	    	UserID_Edit.setOnEditorActionListener(new OnEditorActionListener() {                     
+		 	    	    @Override
+		 	    	    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) { 	    	    	
+		 	    	    	try {  	 	    	    		
+			 				     UserID =  UserID_Edit.getText().toString();
+			 				     if (UserID.length() !=0)  UserIDWindow.dismiss();	 
+			 				     return true;		 				     
+			 				   }
+			 				 catch (Exception e) { 		 					 
+			 			 	    	e.printStackTrace(); 
+			 			 	    	return false;
+			 			 	      } 
+		 	    	    }
+		 	    	});
+		 	    	
+		 	    	btnClosePopup = (Button) layout.findViewById(R.id.btn_close_popup);
+		 	    	
+		 	    	//Listener for OK Button
+		 	    	btnClosePopup.setOnClickListener(new View.OnClickListener(){ 
+		 	    	@Override	
+		 	   		public void onClick(View v) { 	 				
+		 				try {  
+		 				     UserID =  UserID_Edit.getText().toString();
+		 				     if (UserID.length() !=0) UserIDWindow.dismiss();	
+		 				    }
+		 				 catch (Exception e) { 	 			 
+		 			 	    	    e.printStackTrace();} 		 
+		 				    }
+		 				});	 	    	
+			      }
+			 catch (Exception e) { 
+		 	    	e.printStackTrace(); 
+		 	      } 
+		 }	
 } // class MainActivity
