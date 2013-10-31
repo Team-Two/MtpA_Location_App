@@ -1,3 +1,5 @@
+//311013 - MtpA - Changed ID data export from Integer to String to reflect XML changes
+
 package uk.ac.sussex.addison.m.androidmaplocation;
 
 import java.io.StringWriter;
@@ -15,7 +17,7 @@ public class XMLMarkerExport {
 			serializer.startDocument("UTF-8", true);
 			serializer.startTag("", "Location");
 			serializer.startTag("", "Marker");
-			serializer.attribute("", "ID", Integer.toString(vCurrMarker.getMarkerID()));
+			serializer.attribute("", "ID", vCurrMarker.getMarkerID());
 			serializer.startTag("", "Latitude");
 			serializer.text(Double.toString(vCurrMarker.getMarkerLat()));
 			serializer.endTag("", "Latitude");

@@ -1,3 +1,6 @@
+//311013 - MtpA -	Changed ID data from Integer to String to reflect XML changes
+//					Changed variable name deviceID to deviceID to be more reflective of actual meaning
+
 package uk.ac.sussex.addison.m.androidmaplocation;
 
 import java.text.DateFormat;
@@ -8,7 +11,7 @@ import java.util.Calendar;
 
 public class UserMarker {
 
-	private final int markerID;
+	private final String deviceID;
 	private final double markerLat;
 	private final double markerLong;
 	private final Calendar markerCal;
@@ -18,7 +21,7 @@ public class UserMarker {
 
 	public static class Builder {
 		// Required parameters
-		private final int markerID;
+		private final String deviceID;
 		private double markerLat;
 		private double markerLong;
 		private Calendar markerCal;
@@ -28,8 +31,8 @@ public class UserMarker {
 
 		// Optional parameters
 
-		public Builder(int markerID, double markerLat, double markerLong, Calendar markerCal) {
-			this.markerID = markerID;
+		public Builder(String deviceID, double markerLat, double markerLong, Calendar markerCal) {
+			this.deviceID = deviceID;
 			this.markerLat = markerLat;
 			this.markerLong = markerLong;
 			this.markerCal = markerCal;
@@ -43,7 +46,7 @@ public class UserMarker {
 	} // class Builder
 
 	private UserMarker(Builder builder) {
-		markerID = builder.markerID;
+		deviceID = builder.deviceID;
 		markerLat = builder.markerLat;
 		markerLong = builder.markerLong;
 		markerCal = builder.markerCal;
@@ -51,8 +54,8 @@ public class UserMarker {
 		markerTime = builder.markerTime;
 	} // builder constructor
 
-	public int getMarkerID() {
-		return markerID;
+	public int getdeviceID() {
+		return deviceID;
 	}
 
 	public double getMarkerLat() {

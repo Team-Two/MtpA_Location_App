@@ -13,7 +13,7 @@
 						<xs:element name="Date" type="xs:date"/>
 						<xs:element name="Time" type="xs:time"/>
 					</xs:sequence>
-					<xs:attribute name="id" type="xs:integer"/>
+					<xs:attribute name="id" type="xs:string"/>
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
